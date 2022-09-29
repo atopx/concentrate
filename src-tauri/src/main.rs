@@ -3,11 +3,24 @@
     windows_subsystem = "windows"
 )]
 
-// Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
+
+use chrono::NaiveDateTime;
+
+
 #[tauri::command]
-fn greet(timestamp: &str) -> String {
-    let ts = timestamp.parse::<i64>().expect_err("invalid timestamp");
-    return format!("{}", ts);
+fn greet(value: &str) -> String {
+    println!("{}", value);
+    let timestamp = value.parse::<i64>();
+    match timestamp {
+        Ok(ts) => {
+            let time: NaiveDateTime = NaiveDateTime::from_timestamp(ts, 0);
+            time.format("%Y-%m-%d %H:%M:%S").to_string()
+        },
+        Err(err) => {
+            println!("invalid timestamp: {}", err);
+            String::from("Invalid timestamp")
+        }
+    }
 }
 
 fn main() {

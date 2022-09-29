@@ -7,7 +7,7 @@ const timestamp = ref("");
 
 async function greet() {
   // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-  greetMsg.value = await invoke("greet", { timestamp: timestamp.value });
+  greetMsg.value = await invoke("greet", { value: timestamp.value });
 }
 </script>
 
