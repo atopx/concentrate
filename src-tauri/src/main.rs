@@ -8,7 +8,7 @@ use chrono::NaiveDateTime;
 
 
 #[tauri::command]
-fn greet(value: &str) -> String {
+fn timestamp_format(value: &str) -> String {
     println!("{}", value);
     let timestamp = value.parse::<i64>();
     match timestamp {
@@ -25,7 +25,7 @@ fn greet(value: &str) -> String {
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![greet])
+        .invoke_handler(tauri::generate_handler![timestamp_format])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
